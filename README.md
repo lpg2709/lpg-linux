@@ -6,73 +6,34 @@ My configuration for minimal linux.
 
 ### Debian
 
-```txt
-                                         _____
-                                        /  __ \\
-                                       |  /    |
-                                       |  \\___-
-                                       -_
-                                         --_
-```
-
 To clone
 
 ```sh
-git clone -b mybranch --single-branch git://sub.domain.com/repo.git
+git clone -b Debian --single-branch https://gitlab.com/lpg2709/lpg-linux
 ```
 
 ### Mint
 
-```txt
-                                        ___________
-                                       |_          \
-                                         | | _____ |
-                                         | | | | | |
-                                         | | | | | |
-                                         | \_____/ |
-                                         \_________/
-```
-
 To clone
 
 ```sh
-git clone -b mybranch --single-branch git://sub.domain.com/repo.git
+git clone -b Mint --single-branch https://gitlab.com/lpg2709/lpg-linux
 ```
 
 ### Mint for Work
 
-```txt
-                                        ___________
-                                       |_          \
-                                         | | _____ |
-                                         | | | | | |
-                                         | | | | | |
-                                         | \_____/ |
-                                         \_________/
-```
-
 To clone
 
 ```sh
-git clone -b mybranch --single-branch git://sub.domain.com/repo.git
+git clone -b MintW --single-branch https://gitlab.com/lpg2709/lpg-linux
 ```
 
 ### Void
 
-```txt
-                                            _______
-                                         _ \\______ -
-                                        | \\  ___  \\ |
-                                        | | /   \ | |
-                                        | | \___/ | |
-                                        | \\______ \\_|
-                                         -_______\\
-```
-
 To clone
 
 ```sh
-git clone -b mybranch --single-branch git://sub.domain.com/repo.git
+git clone -b Void --single-branch https://gitlab.com/lpg2709/lpg-linux
 ```
 
 ## Features
