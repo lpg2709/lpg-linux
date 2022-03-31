@@ -1,46 +1,32 @@
-# lpg-linux
+# lpgDebian
 
-My configuration for minimal linux.
+Installation of my environment using Debian as a base.
 
-## Distros
+## Install
 
-### Debian
+Install [Debian](https://www.debian.org/) in its minimal version, just with `standard system utilities`
 
-To clone
-
-```sh
-git clone -b Debian --single-branch https://gitlab.com/lpg2709/lpg-linux
-```
-
-### Mint
-
-To clone
+With the installation finished, login and follow the following commands:
 
 ```sh
-git clone -b Mint --single-branch https://gitlab.com/lpg2709/lpg-linux
+su -
+apt install git
+git clone https://github.com/lpg2709/lpgDebian
+cd lpgDebian && ./install.sh
 ```
 
-### Mint for Work
-
-To clone
-
-```sh
-git clone -b MintW --single-branch https://gitlab.com/lpg2709/lpg-linux
-```
-
-### Void
-
-To clone
-
-```sh
-git clone -b Void --single-branch https://gitlab.com/lpg2709/lpg-linux
-```
+This will prepare the system for installation, after system reboot, enter your root password, the procedure will continue.
 
 ## Features
 
-- [dwm 6.3](https://dwm.suckless.org/)
+- [dwm 6.8](https://dwm.suckless.org/)
 - [st 0.8.4](https://st.suckless.org/)
 - [dmenu 5.0](https://tools.suckless.org/dmenu/)
 - [GUI Gruvbox Theme by TheGreatMcPain](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
 - [feh](https://feh.finalrewind.org/)
-- [pfetch](https://github.com/dylanaraps/pfetch)
+- [Thunar File Manager](https://docs.xfce.org/xfce/thunar/start)
+- and more ...
+
+## Future
+
+In addition to the improvements in the script for installation, a linux distribution based on my way of using linux, aiming for optimization and lightweight.

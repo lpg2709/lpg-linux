@@ -1,0 +1,5 @@
+#!/bin/bash
+
+WALLPAPERS_DIR="/usr/share/wallpapers/lpgDebian"
+
+feh --bg-scale "$WALLPAPERS_DIR/penguin.jpg"
