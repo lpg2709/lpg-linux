@@ -1,0 +1,3 @@
+#!/bin/bash
+
+st -e bash -c "cat /bin/dwm-help/dwmhelp.txt; sh -c 'read a'"
