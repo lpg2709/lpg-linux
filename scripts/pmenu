@@ -1,0 +1,18 @@
+#!/bin/bash
+
+OPT_QUIT=" quit-pmenu"
+OPT_LOGOUT=" logout"
+OPT_SUSPEND=" suspend"
+OPT_REBOOT=" reboot"
+OPT_POWEROFF=" poweroff"
+
+DMENU='dmenu -i -l 5'
+choice=$(echo -e "$OP_QUIT\n$OPT_LOGOUT\n$OPT_SUSPEND\n$OPT_REBOOT\n$OPT_POWEROFF" | $DMENU)
+
+case "$choice" in
+	"$OPT_QUIT") exit 0 ;;
+	"$OPT_LOGOUT") pkill dwm ;;
+	"$OPT_SUSPEND") systemctl suspend;;
+	"$OPT_REBOOT") systemctl reboot ;;
+	"$OPT_POWEROFF") systemctl poweroff ;;
+esac
