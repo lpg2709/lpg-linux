@@ -81,7 +81,7 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 
 printc "  Creating configurations files\n" "i"
 # .dwm autostart
-cp -r "$SC_FOLDER/.dwm" "$USER_HOME/"
+cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm/autostart.sh"
 # .tmux
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
