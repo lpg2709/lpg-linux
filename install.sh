@@ -47,6 +47,7 @@ check_root
 
 printc "\nStarting installation...\n" "i"
 USER_HOME=$(eval echo ~${SUDO_USER})
+USER_NAME="${SUDO_USER:-$USER}"
 printc "  Current user home: $USER_HOME\n" "l"
 
 if [ ! -d "$USER_HOME" ]; then
@@ -78,13 +79,13 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 printc "  Creating configurations files\n" "i"
 # .dwm autoconfig
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
-sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.dwm/autostart.sh"
+sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm/autostart.sh"
 # .tmux
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
-sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.tmux.conf"
+sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.tmux.conf"
 # .vimrc
 bash -c  "$(wget -qO- https://git.io/JCbTi)"
-sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.vimrc"
+sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.vimrc"
 # dwm entry
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
@@ -105,7 +106,7 @@ sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
 
 printc "  Setup Gruvbox theme\n" "i"
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
-sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
+sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
 
 printc "  Copy fonts\n" "i"
 sudo cp -rf "$USER_HOME/$PROJECT/fonts/." "$USER_HOME/.local/share/fonts"
