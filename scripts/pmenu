@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DMENU='dmenu -i -l 4'
+choice=$(echo -e "quit-pmenu\nlogout\nreboot\npoweroff" | $DMENU)
+
+case "$choice" in
+	quit-pmenu) exit 0 ;;
+	logout) pkill dwm ;;
+	reboot) systemctl reboot ;;
+	poweroff) systemctl poweroff ;;
+esac
