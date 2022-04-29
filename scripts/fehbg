@@ -1,5 +1,5 @@
 #!/bin/bash
 
-WALLPAPERS_DIR="/usr/share/wallpapers/lpgMint"
+WALLPAPERS_DIR="/usr/share/wallpapers/lpg-linux"
 
 feh --bg-scale "$WALLPAPERS_DIR/houses.jpg"

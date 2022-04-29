@@ -6,7 +6,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "base-devel" "libx11-devel" "libxft-devel" "libxinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs")
+DEPS_PACK=("vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs")
 POST_PACK=("tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "thunar" "baobab" "gnome-disk-utility")
 
 function printc(){
