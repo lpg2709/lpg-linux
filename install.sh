@@ -3,7 +3,7 @@
 DWM="dwm-6.3"
 DMENU="dmenu-5.0"
 ST="st-0.8.4"
-PROJECT="lpgMintW"
+PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget" "sudo")
 DEPS_PACK=("vim" "make" "build-essential" "libx11-dev" "libxft-dev" "libxinerama-dev" "fonts-font-awesome" "feh")
@@ -47,20 +47,20 @@ check_root
 
 printc "\nStarting installation...\n" "i"
 printc "  Inform the current user: " "l"
-read USERNAME
+read _USERNAME
 
-if [ -z "$USERNAME" ]; then
+if [ -z "$_USERNAME" ]; then
 	printc "User name can't be empity!\n" "e"
 	exit 1
 fi
 
-id "$USERNAME" &>/dev/null
+id "$_USERNAME" &>/dev/null
 if [ ! "$?" -eq "0" ]; then
 	printc "User not found!\n" "e"
 	exit 1
 fi
 
-U_FOLDER="/home/$USERNAME"
+U_FOLDER="/home/$_USERNAME"
 
 printc "  Installing base packages\n" "i"
 apt install ${INIT_PACK[@]} -y
@@ -68,7 +68,7 @@ apt install ${INIT_PACK[@]} -y
 printc "  Installing dependencis\n" "i"
 sudo apt install ${DEPS_PACK[@]} -y
 
-U_FOLDER="/home/$USERNAME"
+U_FOLDER="/home/$_USERNAME"
 S_FOLDER="$U_FOLDER/$PROJECT/suckless"
 CF_FOLDER="$U_FOLDER/$PROJECT/config-files"
 SC_FOLDER="$U_FOLDER/$PROJECT/scripts"
@@ -86,7 +86,7 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 
 printc "  Creating configurations files\n" "i"
 # .dwm autoconfig
-cp -r "$DF_FOLDER/.dwm" "$U_FOLDER/"
+cp -r "$CF_FOLDER/.dwm" "$U_FOLDER/"
 sudo chown  "$USERNAME:$USERNAME" "$U_FOLDER/.dwm/autostart.sh"
 # .tmux
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
