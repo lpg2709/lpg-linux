@@ -46,21 +46,13 @@ function check_root(){
 check_root
 
 printc "\nStarting installation...\n" "i"
-printc "  Inform the current user: " "l"
-read _USERNAME
+USER_HOME=$(eval echo ~${SUDO_USER})
+printc "  Current user home: $USER_HOME" "l"
 
-if [ -z "$_USERNAME" ]; then
-	printc "User name can't be empity!\n" "e"
-	exit 1
-fi
-
-id "$_USERNAME" &>/dev/null
-if [ ! "$?" -eq "0" ]; then
+if [ ! -d "$USER_HOME" ]; then
 	printc "User not found!\n" "e"
 	exit 1
 fi
-
-U_FOLDER="/home/$_USERNAME"
 
 printc "  Installing base packages\n" "i"
 apt install ${INIT_PACK[@]} -y
@@ -68,10 +60,10 @@ apt install ${INIT_PACK[@]} -y
 printc "  Installing dependencis\n" "i"
 sudo apt install ${DEPS_PACK[@]} -y
 
-U_FOLDER="/home/$_USERNAME"
-S_FOLDER="$U_FOLDER/$PROJECT/suckless"
-CF_FOLDER="$U_FOLDER/$PROJECT/config-files"
-SC_FOLDER="$U_FOLDER/$PROJECT/scripts"
+USER_HOME="/home/$_USERNAME"
+S_FOLDER="$USER_HOME/$PROJECT/suckless"
+CF_FOLDER="$USER_HOME/$PROJECT/config-files"
+SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 PATCHS_FOLDER="$S_FOLDER/patchs"
 
 printc "  Compile and install [$DWM]\n" "i"
@@ -86,14 +78,14 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 
 printc "  Creating configurations files\n" "i"
 # .dwm autoconfig
-cp -r "$CF_FOLDER/.dwm" "$U_FOLDER/"
-sudo chown  "$USERNAME:$USERNAME" "$U_FOLDER/.dwm/autostart.sh"
+cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
+sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.dwm/autostart.sh"
 # .tmux
-bash -c  "$(wget -qO- https://git.io/JCbIh)"
-sudo chown  "$USERNAME:$USERNAME" "$U_FOLDER/.tmux.conf"
+bash -c  "$(wget -qO- v)"
+sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.tmux.conf"
 # .vimrc
 bash -c  "$(wget -qO- https://git.io/JCbTi)"
-sudo chown  "$USERNAME:$USERNAME" "$U_FOLDER/.vimrc"
+sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.vimrc"
 # dwm entry
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
@@ -105,19 +97,19 @@ cp -r "$SC_FOLDER/dwm-help" "/bin/dwm-help"
 
 printc "  Copy wallpapers\n" "i"
 sudo mkdir "/usr/share/wallpapers/$PROJECT"
-sudo cp -a "$U_FOLDER/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/$PROJECT"
+sudo cp -a "$USER_HOME/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/$PROJECT"
 
 printc "  Copy Gruvbox theme\n" "i"
-sudo cp -rf "$U_FOLDER/$PROJECT/theme/gruvbox-material-gtk/themes/." "/usr/share/themes"
-sudo cp -rf "$U_FOLDER/$PROJECT/theme/gruvbox-material-gtk/icons/." "/usr/share/icons"
+sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/themes/." "/usr/share/themes"
+sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/icons/." "/usr/share/icons"
 sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
 
 printc "  Setup Gruvbox theme\n" "i"
-cp "$CF_FOLDER/gtk-3.0/settings.ini" "$U_FOLDER/.config/gtk-3.0/"
-sudo chown  "$USERNAME:$USERNAME" "$U_FOLDER/.config/gtk-3.0/settings.ini"
+cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
+sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
 
 printc "  Copy fonts\n" "i"
-sudo cp -rf "$U_FOLDER/$PROJECT/fonts/." "$U_FOLDER/.local/share/fonts"
+sudo cp -rf "$USER_HOME/$PROJECT/fonts/." "$USER_HOME/.local/share/fonts"
 
 printc "  Installing programs\n" "i"
 sudo apt install ${POST_PACK[@]} -y
