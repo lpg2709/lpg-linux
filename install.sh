@@ -7,7 +7,7 @@ PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
 DEPS_PACK=("vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs")
-POST_PACK=("tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "thunar" "baobab" "gnome-disk-utility")
+POST_PACK=("tmux" "net-tools""htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
@@ -89,7 +89,10 @@ sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.tmux.conf"
 # .vimrc
 bash -c  "$(wget -qO- https://git.io/JCbTi)"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.vimrc"
+
+printc "  Creating dwm.desktop files\n" "i"
 # dwm entry
+mkdir "/usr/share/xsessions"
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
 printc "  Creating some scripts\n" "i"
@@ -99,8 +102,8 @@ cp "$SC_FOLDER/helpdwm" "/bin/helpdwm"
 cp -r "$SC_FOLDER/dwm-help" "/bin/dwm-help"
 
 printc "  Copy wallpapers\n" "i"
-sudo mkdir "/usr/share/wallpapers/lpgMint"
-sudo cp -a "$USER_HOME/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/lpgMint"
+sudo mkdir "/usr/share/wallpapers/$PROJECT"
+sudo cp -a "$USER_HOME/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/$PROJECT"
 
 printc "  Copy Gruvbox theme\n" "i"
 sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/themes/." "/usr/share/themes"
@@ -108,6 +111,7 @@ sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/icons/." "/usr/share
 sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
 
 printc "  Setup Gruvbox theme\n" "i"
+mkdir -p "$USER_HOME/.config/gtk-3.0"
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
 
