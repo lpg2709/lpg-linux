@@ -80,7 +80,7 @@ printc "  Creating configurations files\n" "i"
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.dwm/autostart.sh"
 # .tmux
-bash -c  "$(wget -qO- v)"
+bash -c  "$(wget -qO- https://git.io/JCbIh)"
 sudo chown  "$USERNAME:$USERNAME" "$USER_HOME/.tmux.conf"
 # .vimrc
 bash -c  "$(wget -qO- https://git.io/JCbTi)"
