@@ -55,6 +55,15 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
+printc "  Changing Mirrors to https://repo-us.voidlinux.org/ in USA: Kansas City\n" "i"
+mkdir -p /etc/xbps.d
+cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/
+sed -i 's|https://alpha.de.repo.voidlinux.org|https://repo-us.voidlinux.org/|g' /etc/xbps.d/10-repository-main.conf
+xbps-install -S
+
+printc "   LOG: Check the repositorys" "i"
+xbps-query -L
+
 printc "  Installing base packages\n" "i"
 sudo xbps-install -Sy ${INIT_PACK[@]}
 
@@ -64,7 +73,6 @@ sudo xbps-install -Sy ${DEPS_PACK[@]}
 S_FOLDER="$USER_HOME/$PROJECT/suckless"
 CF_FOLDER="$USER_HOME/$PROJECT/config-files"
 SC_FOLDER="$USER_HOME/$PROJECT/scripts"
-PATCHS_FOLDER="$S_FOLDER/patchs"
 
 printc "  Creating some folders\n" "i"
 xdg-user-dirs-update
@@ -94,6 +102,9 @@ printc "  Creating dwm.desktop files\n" "i"
 # dwm entry
 mkdir "/usr/share/xsessions"
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
+
+printc "  Setup lightdm to start on boot\n" "i"
+ln -s /etc/sv/lightdm /var/service
 
 printc "  Creating some scripts\n" "i"
 cp "$SC_FOLDER/fehbg" "/bin/fehbg"
