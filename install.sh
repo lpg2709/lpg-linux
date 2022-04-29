@@ -7,7 +7,7 @@ PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
 DEPS_PACK=("vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs")
-POST_PACK=("tmux" "net-tools""htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility")
+POST_PACK=("tmux" "net-tools" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
