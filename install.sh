@@ -102,7 +102,7 @@ cp "$SC_FOLDER/helpdwm" "/bin/helpdwm"
 cp -r "$SC_FOLDER/dwm-help" "/bin/dwm-help"
 
 printc "  Copy wallpapers\n" "i"
-sudo mkdir "/usr/share/wallpapers/$PROJECT"
+sudo mkdir -p "/usr/share/wallpapers/$PROJECT"
 sudo cp -a "$USER_HOME/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/$PROJECT"
 
 printc "  Copy Gruvbox theme\n" "i"
