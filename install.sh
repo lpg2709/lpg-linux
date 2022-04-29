@@ -47,7 +47,7 @@ check_root
 
 printc "\nStarting installation...\n" "i"
 USER_HOME=$(eval echo ~${SUDO_USER})
-printc "  Current user home: $USER_HOME" "l"
+printc "  Current user home: $USER_HOME\n" "l"
 
 if [ ! -d "$USER_HOME" ]; then
 	printc "User not found!\n" "e"
@@ -60,7 +60,6 @@ apt install ${INIT_PACK[@]} -y
 printc "  Installing dependencis\n" "i"
 sudo apt install ${DEPS_PACK[@]} -y
 
-USER_HOME="/home/$_USERNAME"
 S_FOLDER="$USER_HOME/$PROJECT/suckless"
 CF_FOLDER="$USER_HOME/$PROJECT/config-files"
 SC_FOLDER="$USER_HOME/$PROJECT/scripts"
