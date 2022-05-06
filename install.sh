@@ -6,7 +6,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget" "sudo")
-DEPS_PACK=("vim" "make" "build-essential" "libx11-dev" "libxft-dev" "libxinerama-dev" "fonts-font-awesome" "feh")
+DEPS_PACK=("vim" "make" "build-essential" "libx11-dev" "libxft-dev" "libxinerama-dev" "fonts-font-awesome" "feh" "fonts-noto-color-emoji")
 POST_PACK=("tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump")
 
 function printc(){
