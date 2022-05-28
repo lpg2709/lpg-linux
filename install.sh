@@ -6,8 +6,8 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm-gtk3-greeter")
-POST_PACK=("tmux" "net-tools" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility")
+DEPS_PACK=("vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm-gtk3-greeter" "pulseaudio")
+POST_PACK=("tmux" "net-tools" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
