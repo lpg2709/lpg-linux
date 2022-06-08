@@ -7,7 +7,7 @@ PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
 DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
-NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen")
+NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen", "ripgrep")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
