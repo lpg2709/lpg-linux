@@ -1,5 +1,4 @@
 #!/bin/bash
-
 DWM="dwm-6.3"
 DMENU="dmenu-5.0"
 ST="st-0.8.4"
@@ -75,22 +74,45 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 printc "  Install virtualenv\n" "i"
 pip install virtualenv
 
-printc "  Installing nvim dependencis\n" "i"
-sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
 
-# TODO: Correção de erro na instalação do NEOVIM
-#   shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
-printc "  Install nvim\n" "i"
-git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
-cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
-rm -rf "$USER_HOME/Downloads/neovim"
+printc "  Check if neovim is installed ...\n" "i"
+nvim --version > /dev/null 2>&1
+if [ ! $(echo $?) -eq 0 ]; then
+	printc "  Installing nvim dependencis\n" "i"
+	sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
+
+	# TODO: Correção de erro na instalação do NEOVIM
+	#   shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+	printc "  Install nvim\n" "i"
+	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
+	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+	rm -rf "$USER_HOME/Downloads/neovim"
+else
+	printc "  neovim is installed. \n" "i"
+fi
+
+printc "  Check if node and npm is installed ...\n" "i"
+node --version > /dev/null 2>&1
+if [ ! $(echo $?) -eq 0 ]; then
+	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	export NVM_DIR="$USER_HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+	sudo nvm install 14.18.1
+else
+	printc "  node and npm is installed. \n" "i"
+fi
+
+printc "  Installing MongoDB ...\n" "i"
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64  ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+sudo apt-get update && sudo apt-get install -y mongodb-org
+mkdir -p ~/data/db
+curl https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d | sudo tee /etc/init.d/mongodb >/dev/null
+sudo chmod +x /etc/init.d/mongodb
 
 # .tmux
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.tmux.conf"
-# .vimrc
-bash -c  "$(wget -qO- https://git.io/JCbTi)"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.vimrc"
 
 
 printc "Cleaning files ...\n" "s"
