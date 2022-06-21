@@ -98,7 +98,7 @@ if [ ! $(echo $?) -eq 0 ]; then
 	export NVM_DIR="$USER_HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 	[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-	sudo nvm install 14.18.1
+	nvm install 14.18.1
 else
 	printc "  node and npm is installed. \n" "i"
 fi
