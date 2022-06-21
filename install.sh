@@ -7,7 +7,7 @@ PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
 DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
-NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen", "ripgrep")
+NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen" "ripgrep")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
@@ -43,7 +43,7 @@ function check_root(){
 	fi
 }
 
-check_root
+# check_root
 
 printc "\nStarting installation...\n" "i"
 USER_HOME=$(eval echo ~${SUDO_USER})
@@ -55,8 +55,14 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
+printc "  Update apt cache ...\n" "i"
+sudo apt update
+
+printc "  Update system package ...\n" "i"
+sudo apt upgrade -y
+
 printc "  Installing base packages\n" "i"
-apt install ${INIT_PACK[@]} -y
+sudo apt install ${INIT_PACK[@]} -y
 
 printc "  Installing dependencis\n" "i"
 sudo apt install ${DEPS_PACK[@]} -y
@@ -69,9 +75,14 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 printc "  Install virtualenv\n" "i"
 pip install virtualenv
 
-printc "  Install nvim" "i"
+printc "  Installing nvim dependencis\n" "i"
+sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
+
+# TODO: Correção de erro na instalação do NEOVIM
+#   shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+printc "  Install nvim\n" "i"
 git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
-cd "$USER_HOME/Downloads/neovim" && git git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
 rm -rf "$USER_HOME/Downloads/neovim"
 
 # .tmux
