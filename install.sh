@@ -103,13 +103,19 @@ else
 	printc "  node and npm is installed. \n" "i"
 fi
 
-printc "  Installing MongoDB ...\n" "i"
-wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-echo "deb [ arch=amd64,arm64  ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
-sudo apt-get update && sudo apt-get install -y mongodb-org
-mkdir -p ~/data/db
-curl https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d | sudo tee /etc/init.d/mongodb >/dev/null
-sudo chmod +x /etc/init.d/mongodb
+printc "  Check if mongodb is installed ...\n" "i"
+mongod --version > /dev/null 2>&1
+if [ ! $(echo $?) -eq 0 ]; then
+	printc "  Installing MongoDB ...\n" "i"
+	wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+	echo "deb [ arch=amd64,arm64  ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+	sudo apt-get update && sudo apt-get install -y mongodb-org
+	mkdir -p ~/data/db
+	curl https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d | sudo tee /etc/init.d/mongodb >/dev/null
+	sudo chmod +x /etc/init.d/mongodb
+else
+	printc "  mongod is installed. \n" "i"
+fi
 
 # .tmux
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
