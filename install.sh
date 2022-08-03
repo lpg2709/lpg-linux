@@ -118,8 +118,14 @@ else
 fi
 
 # .tmux
+printc "Install config for tmux ...\n" "s"
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
 
+# .config/neovim
+printc "Install config for neovim ...\n" "s"
+git clone https://gitlab.com/lpg2709/neovim-config.git "$USER_HOME/Downloads/neovim-config"
+cd "$USER_HOME/Downloads/neovim-config" && ./install.sh
+rm -rf "$USER_HOME/Downloads/neovim-config"
 
 printc "Cleaning files ...\n" "s"
 
