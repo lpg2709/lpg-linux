@@ -5,8 +5,7 @@ DMENU="dmenu-5.0"
 ST="st-0.8.4"
 PROJECT="lpg-linux"
 
-INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm-gtk3-greeter" "pulseaudio")
+INIT_PACK=("git" "curl" "wget" "vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm-gtk3-greeter" "pulseaudio")
 POST_PACK=("tmux" "net-tools" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol")
 
 function printc(){
@@ -66,11 +65,8 @@ xbps-query -L
 printc "  Update the system\n" "i"
 xbps-install -Suy
 
-printc "  Installing base packages\n" "i"
+printc "  Installing base packages and dependencis\n" "i"
 sudo xbps-install -Sy ${INIT_PACK[@]}
-
-printc "  Installing dependencis\n" "i"
-sudo xbps-install -Sy ${DEPS_PACK[@]}
 
 S_FOLDER="$USER_HOME/$PROJECT/suckless"
 CF_FOLDER="$USER_HOME/$PROJECT/config-files"
