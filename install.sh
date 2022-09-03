@@ -58,7 +58,7 @@ fi
 printc "  Changing Mirrors to https://repo-us.voidlinux.org/ in USA: Kansas City\n" "i"
 mkdir -p /etc/xbps.d
 cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/
-sed -i 's|https://alpha.de.repo.voidlinux.org|https://repo-us.voidlinux.org/|g' /etc/xbps.d/10-repository-main.conf
+sed -i 's|https://alpha.de.repo.voidlinux.org|https://repo-us.voidlinux.org/|g' /etc/xbps.d/00-repository-main.conf
 xbps-install -S
 
 printc "   LOG: Check the repositorys" "i"
