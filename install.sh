@@ -63,6 +63,9 @@ xbps-install -S
 printc "   LOG: Check the repositorys\n" "i"
 xbps-query -L
 
+printc "  Update the system\n" "i"
+xbps-install -Suy
+
 printc "  Installing base packages\n" "i"
 sudo xbps-install -Sy ${INIT_PACK[@]}
 
