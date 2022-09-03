@@ -60,7 +60,7 @@ mkdir -p /etc/xbps.d
 echo "repository=https://repo-us.voidlinux.org/current/" > /etc/xbps.d/00-repository-main.conf
 xbps-install -S
 
-printc "   LOG: Check the repositorys" "i"
+printc "   LOG: Check the repositorys\n" "i"
 xbps-query -L
 
 printc "  Installing base packages\n" "i"
