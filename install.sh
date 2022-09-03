@@ -104,6 +104,12 @@ sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 printc "  Setup lightdm to start on boot\n" "i"
 ln -s /etc/sv/lightdm /var/service
 
+
+printc "  Fixing .Xauthority\n" "i"
+mv .Xauthority old.Xauthority 
+touch ~/.Xauthority
+xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+
 printc "  Creating some scripts\n" "i"
 cp "$SC_FOLDER/fehbg" "/bin/fehbg"
 cp "$SC_FOLDER/pmenu" "/bin/pmenu"
