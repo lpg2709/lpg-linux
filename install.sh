@@ -5,8 +5,8 @@ DMENU="dmenu-5.0"
 ST="st-0.8.4"
 PROJECT="lpg-linux"
 
-INIT_PACK=("git" "curl" "wget" "vim" "make" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
-POST_PACK=("tmux" "net-tools" "htop" "jq" "cmake" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol")
+INIT_PACK=("git" "curl" "wget" "vim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
+POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
@@ -84,6 +84,22 @@ cd "$S_FOLDER/$DMENU" && sudo make clean install
 
 printc "  Compile and install [pfetch]\n" "i"
 cd "$SC_FOLDER/pfetch" && sudo make install
+
+printc "  Check if neovim is installed ...\n" "i"
+nvim --version > /dev/null 2>&1
+if [ ! $(echo $?) -eq 0 ]; then
+	printc "  Installing nvim dependencis\n" "i"
+	sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
+
+	# TODO: Correção de erro na instalação do NEOVIM
+	#   shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+	printc "  Install nvim\n" "i"
+	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
+	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+	rm -rf "$USER_HOME/Downloads/neovim"
+else
+	printc "  neovim is installed. \n" "i"
+fi
 
 printc "  Creating configurations files\n" "i"
 # .dwm autostart
