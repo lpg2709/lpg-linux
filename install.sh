@@ -104,8 +104,7 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 
 # config all
 git clone https://gitlab.com/lpg2709/dotfiles
-cd dotfiles/
-sh ./install.sh
+/bin/bash "$USER_HOME/$PROJECT/dotfiles/install.sh"
 
 printc "  Creating dwm.desktop files\n" "i"
 mkdir -p /etc/X11/xorg.conf.d/
