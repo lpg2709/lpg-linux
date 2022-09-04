@@ -88,11 +88,6 @@ cd "$SC_FOLDER/pfetch" && sudo make install
 printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
-	printc "  Installing nvim dependencis\n" "i"
-	sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
-
-	# TODO: Correção de erro na instalação do NEOVIM
-	#   shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
 	printc "  Install nvim\n" "i"
 	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
 	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
