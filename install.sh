@@ -107,7 +107,6 @@ sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter
 
 
 printc "  Fixing .Xauthority\n" "i"
-mv .Xauthority old.Xauthority 
 touch ~/.Xauthority
 xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 
