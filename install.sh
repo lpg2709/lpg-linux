@@ -89,10 +89,9 @@ printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
 	printc "  Install nvim\n" "i"
-	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
-	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
-	sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/Downloads"
-	rm -rf "$USER_HOME/Downloads/neovim"
+	git clone https://github.com/neovim/neovim "/tmp/neovim"
+	cd "/tmp/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+	rm -rf "/tmp/neovim"
 else
 	printc "  neovim is installed. \n" "i"
 fi
@@ -103,8 +102,9 @@ cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 
 # config all
-git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/$PROJECT/dotfiles"
-/bin/bash "$USER_HOME/$PROJECT/dotfiles/install.sh"
+git clone https://gitlab.com/lpg2709/dotfiles "/tmp/dotfiles"
+/bin/bash "/tmp/install.sh"
+rm -rf "/tmp/dotfiles"
 
 printc "  Creating dwm.desktop files\n" "i"
 mkdir -p /etc/X11/xorg.conf.d/
@@ -121,7 +121,6 @@ sed -i 's/#theme-name=/theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm
 sed -i 's/#icon-theme-name=/icon-theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#background=/background = /usr/share/wallpapers/lpg-linux/houses.jpg' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
-
 
 printc "  Fixing .Xauthority\n" "i"
 touch ~/.Xauthority
@@ -145,7 +144,8 @@ sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
 printc "  Setup Gruvbox theme\n" "i"
 mkdir -p "$USER_HOME/.config/gtk-3.0"
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
-sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
+
+sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
 
 printc "  Installing programs\n" "i"
 sudo xbps-install -Sy ${POST_PACK[@]} -y
