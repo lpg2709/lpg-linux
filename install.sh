@@ -97,11 +97,14 @@ bash -c  "$(wget -qO- https://git.io/JCbTi)"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.vimrc"
 
 printc "  Creating dwm.desktop files\n" "i"
+mkdir -p /etc/X11/xorg.conf.d/
+sudo cp "$CF_FOLDER/30-keyboard.conf" "/etc/X11/xorg.conf.d/"
 # dwm entry
 mkdir "/usr/share/xsessions"
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
 printc "  Setup lightdm to start on boot\n" "i"
+ln -s /etc/sv/dbus /var/service
 ln -s /etc/sv/lightdm /var/service
 sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
 
