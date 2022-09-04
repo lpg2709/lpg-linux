@@ -102,12 +102,11 @@ printc "  Creating configurations files\n" "i"
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm/autostart.sh"
-# .tmux
-bash -c  "$(wget -qO- https://git.io/JCbIh)"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.tmux.conf"
-# .vimrc
-bash -c  "$(wget -qO- https://git.io/JCbTi)"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.vimrc"
+
+# config all
+git clone https://gitlab.com/lpg2709/dotfiles
+cd dotfiles/
+sh ./install.sh
 
 printc "  Creating dwm.desktop files\n" "i"
 mkdir -p /etc/X11/xorg.conf.d/
