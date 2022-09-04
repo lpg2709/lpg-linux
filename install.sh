@@ -91,6 +91,7 @@ if [ ! $(echo $?) -eq 0 ]; then
 	printc "  Install nvim\n" "i"
 	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
 	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+	sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/Downloads"
 	rm -rf "$USER_HOME/Downloads/neovim"
 else
 	printc "  neovim is installed. \n" "i"
@@ -99,6 +100,7 @@ fi
 printc "  Creating configurations files\n" "i"
 # .dwm autostart
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
+sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm/autostart.sh"
 # .tmux
 bash -c  "$(wget -qO- https://git.io/JCbIh)"
