@@ -91,7 +91,7 @@ if [ ! $(echo $?) -eq 0 ]; then
 	printc "  Install nvim\n" "i"
 	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
 	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
-	sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/Downloads"
+	sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/Downloads"
 	rm -rf "$USER_HOME/Downloads/neovim"
 else
 	printc "  neovim is installed. \n" "i"
@@ -100,8 +100,7 @@ fi
 printc "  Creating configurations files\n" "i"
 # .dwm autostart
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm/autostart.sh"
+sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 
 # config all
 git clone https://gitlab.com/lpg2709/dotfiles
@@ -147,7 +146,7 @@ sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
 printc "  Setup Gruvbox theme\n" "i"
 mkdir -p "$USER_HOME/.config/gtk-3.0"
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
-sudo chown  "$USER_NAME:$USER_NAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
+sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config/gtk-3.0/settings.ini"
 
 printc "  Installing programs\n" "i"
 sudo xbps-install -Sy ${POST_PACK[@]} -y
