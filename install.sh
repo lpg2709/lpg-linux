@@ -106,6 +106,10 @@ sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 printc "  Setup lightdm to start on boot\n" "i"
 ln -s /etc/sv/dbus /var/service
 ln -s /etc/sv/lightdm /var/service
+# theme config
+sed -i 's/#theme-name=/theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
+sed -i 's/#icon-theme-name=/icon-theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
+sed -i 's/#background=/background = /usr/share/wallpapers/lpg-linux/houses.jpg' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
 
 
