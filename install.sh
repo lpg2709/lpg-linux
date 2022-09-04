@@ -89,9 +89,9 @@ printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
 	printc "  Install nvim\n" "i"
-	git clone https://github.com/neovim/neovim "/tmp/neovim"
-	cd "/tmp/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
-	rm -rf "/tmp/neovim"
+	git clone https://github.com/neovim/neovim "$USER_HOME/neovim"
+	cd "$USER_HOME/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+	rm -rf "$USER_HOME/neovim"
 else
 	printc "  neovim is installed. \n" "i"
 fi
@@ -102,9 +102,9 @@ cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 
 # config all
-git clone https://gitlab.com/lpg2709/dotfiles "/tmp/dotfiles"
-/bin/bash "/tmp/dotfiles/install.sh"
-rm -rf "/tmp/dotfiles"
+git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
+/bin/bash "$USER_HOME/dotfiles/install.sh"
+rm -rf "$USER_HOME/dotfiles"
 
 printc "  Creating dwm.desktop files\n" "i"
 mkdir -p /etc/X11/xorg.conf.d/
