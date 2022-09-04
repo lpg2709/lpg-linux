@@ -113,18 +113,11 @@ sudo cp "$CF_FOLDER/30-keyboard.conf" "/etc/X11/xorg.conf.d/"
 mkdir "/usr/share/xsessions"
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
-printc "  Setup lightdm to start on boot\n" "i"
-ln -s /etc/sv/dbus /var/service
-ln -s /etc/sv/lightdm /var/service
 # theme config
 sed -i 's/#theme-name=/theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#icon-theme-name=/icon-theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#background=/background = /usr/share/wallpapers/lpg-linux/houses.jpg' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
-
-printc "  Fixing .Xauthority\n" "i"
-touch ~/.Xauthority
-xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 
 printc "  Creating some scripts\n" "i"
 cp "$SC_FOLDER/fehbg" "/bin/fehbg"
@@ -149,6 +142,14 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
 
 printc "  Installing programs\n" "i"
 sudo xbps-install -Sy ${POST_PACK[@]} -y
+
+printc "  Setup lightdm to start on boot\n" "i"
+ln -s /etc/sv/dbus /var/service
+ln -s /etc/sv/lightdm /var/service
+
+printc "  Fixing .Xauthority\n" "i"
+touch ~/.Xauthority
+xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 
 # printc "Cleaning files and prepering for reboot\n" "s"
 
