@@ -38,7 +38,7 @@ function check_root(){
 	fi
 }
 
-check_root
+# check_root
 
 printc "\nStarting installation...\n" "i"
 USER_HOME=$(eval echo ~${SUDO_USER})
