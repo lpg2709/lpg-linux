@@ -2,7 +2,7 @@
 
 PROJECT="lpgMint"
 
-INIT_PACK=("curl" "wget" "sudo" "tmux" "net-tools" "python3" "htop" "jq" "neovim" "make")
+INIT_PACK=("curl" "wget" "tmux" "net-tools" "python" "htop" "jq" "neovim" "make")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
@@ -50,7 +50,7 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
-printc "  Installing base packages\n" "i"
+printc "  Installing update\n" "i"
 pkg upgrade -y
 
 printc "  Installing base packages\n" "i"
