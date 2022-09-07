@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PROJECT="lpgMint"
+PROJECT="lpg-linux"
 
-INIT_PACK=("curl" "wget" "tmux" "net-tools" "python" "htop" "jq" "neovim" "make")
+INIT_PACK=("curl" "wget" "tmux" "net-tools" "python" "htop" "jq" "neovim" "make" "neofetch")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
