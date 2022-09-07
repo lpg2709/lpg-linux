@@ -49,9 +49,6 @@ pkg install ${INIT_PACK[@]} -y
 CF_FOLDER="$USER_HOME/$PROJECT/config-files"
 SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 
-# printc "  Compile and install [pfetch]\n" "i"
-# cd "$SC_FOLDER/pfetch" && sudo make install
-
 printc "  Creating configurations files\n" "i"
 # config all
 git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
