@@ -30,16 +30,6 @@ function printc(){
 	printf "$PRIMARY_COLOR$msg$CLEAR_COLOR"
 }
 
-function check_root(){
-	# Check if is root user
-	if [[ ! "$(id -u)" -eq "0" ]];then
-		printc "\nError: Root user is required!\n\n" "e"
-		exit 1
-	fi
-}
-
-# check_root
-
 printc "\nStarting installation...\n" "i"
 USER_HOME=$(eval echo ~${SUDO_USER})
 USER_NAME="${SUDO_USER:-$USER}"
@@ -68,8 +58,8 @@ git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
 /bin/bash "$USER_HOME/dotfiles/install.sh"
 rm -rf "$USER_HOME/dotfiles"
 
-# printc "  Creating some scripts\n" "i"
-
+printc "  Setup storageaccess\n" "i"
+termux-setup-storage
 
 printc "Cleaning files and prepering for reboot\n" "s"
 
