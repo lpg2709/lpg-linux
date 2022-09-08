@@ -2,7 +2,7 @@
 
 PROJECT="lpg-linux"
 
-INIT_PACK=("curl" "wget" "tmux" "net-tools" "python" "htop" "jq" "neovim" "make" "neofetch")
+INIT_PACK=("curl" "wget" "tmux" "net-tools" "python" "htop" "jq" "neovim" "make" "neofetch" "silversearcher-ag")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
