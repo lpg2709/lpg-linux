@@ -85,12 +85,6 @@ cd "$S_FOLDER/$DMENU" && sudo make clean install
 printc "  Compile and install [pfetch]\n" "i"
 cd "$SC_FOLDER/pfetch" && sudo make install
 
-# config all
-printc "  Install my configs\n" "i"
-git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
-/bin/bash "$USER_HOME/dotfiles/install.sh"
-rm -rf "$USER_HOME/dotfiles"
-
 printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
@@ -102,10 +96,19 @@ else
 	printc "  neovim is installed. \n" "i"
 fi
 
+printc "  Returning to project folder\n" "i"
+cd "$USER_HOME/$PROJECT"
+
 printc "  Creating configurations files\n" "i"
 # .dwm autostart
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
+
+# config all
+printc "  Install my configs\n" "i"
+git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
+/bin/bash "$USER_HOME/dotfiles/install.sh"
+rm -rf "$USER_HOME/dotfiles"
 
 printc "  Creating dwm.desktop files\n" "i"
 mkdir -p /etc/X11/xorg.conf.d/
