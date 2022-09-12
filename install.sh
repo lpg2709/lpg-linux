@@ -111,13 +111,16 @@ git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
 rm -rf "$USER_HOME/dotfiles"
 
 printc "  Creating dwm.desktop files\n" "i"
-mkdir -p /etc/X11/xorg.conf.d/
-sudo cp "$CF_FOLDER/30-keyboard.conf" "/etc/X11/xorg.conf.d/"
 # dwm entry
 mkdir "/usr/share/xsessions"
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
+printc "  Creating30-keyboard files, for abnt keyboard\n" "i"
+mkdir -p /etc/X11/xorg.conf.d/
+sudo cp "$CF_FOLDER/30-keyboard.conf" "/etc/X11/xorg.conf.d/"
+
 # theme config
+printc "  Setting Gruvbox-Material-Dark to lightdm-greeter\n" "i"
 sed -i 's/#theme-name=/theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#icon-theme-name=/icon-theme-name = Gruvbox-Material-Dark/' /etc/lightdm/lightdm-gtk-greeter.conf
 sed -i 's/#background=/background = /usr/share/wallpapers/lpg-linux/houses.jpg' /etc/lightdm/lightdm-gtk-greeter.conf
