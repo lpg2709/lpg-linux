@@ -154,6 +154,9 @@ printc "  Setup lightdm to start on boot\n" "i"
 ln -s /etc/sv/dbus /var/service
 ln -s /etc/sv/lightdm /var/service
 
+printc "  Fix delete key on st\n" "i"
+echo "set enable-keypad on" >> ~/.inputrc
+
 printc "  Fixing .Xauthority\n" "i"
 touch ~/.Xauthority
 xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
