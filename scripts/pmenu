@@ -6,7 +6,7 @@ OPT_REBOOT=" reboot"
 OPT_POWEROFF=" poweroff"
 
 DMENU='dmenu -i -l 5'
-choice=$(echo -e "$OP_QUIT\n$OPT_LOGOUT\n$OPT_REBOOT\n$OPT_POWEROFF" | $DMENU)
+choice=$(echo -e "$OPT_QUIT\n$OPT_LOGOUT\n$OPT_REBOOT\n$OPT_POWEROFF" | $DMENU)
 
 case "$choice" in
 	"$OPT_QUIT") exit 0 ;;
