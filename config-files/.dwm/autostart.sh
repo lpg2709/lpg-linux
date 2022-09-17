@@ -22,7 +22,7 @@ dwm_hdd(){
 
 dwm_pkgupdates() {
 	upgrds="$(aptitude search '~U' | wc -l)"
-	total="$(dpkg -l | grep -c ^i)"
+	total="$(xbps-query -l | wc -l)"
 
 	echo "[  $upgrds/$total ]"
 }
