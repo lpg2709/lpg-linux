@@ -1,11 +1,16 @@
 #!/bin/bash
 
-DMENU='dmenu -i -l 4'
-choice=$(echo -e "quit-pmenu\nlogout\nreboot\npoweroff" | $DMENU)
+OPT_QUIT=" quit-pmenu"
+OPT_LOGOUT=" logout"
+OPT_REBOOT=" reboot"
+OPT_POWEROFF=" poweroff"
+
+DMENU='dmenu -i -l 5'
+choice=$(echo -e "$OP_QUIT\n$OPT_LOGOUT\n$OPT_REBOOT\n$OPT_POWEROFF" | $DMENU)
 
 case "$choice" in
-	quit-pmenu) exit 0 ;;
-	logout) pkill dwm ;;
-	reboot) systemctl reboot ;;
-	poweroff) systemctl poweroff ;;
+	"$OPT_QUIT") exit 0 ;;
+	"$OPT_LOGOUT") pkill dwm ;;
+	"$OPT_REBOOT") sudo shutdown -r now;;
+	"$OPT_POWEROFF") sudo shutdown -h now;;
 esac
