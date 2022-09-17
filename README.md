@@ -2,7 +2,11 @@
 
 My configuration for minimal linux.
 
+Current using [Void](https://voidlinux.org/)
+
 ## Distros
+
+> Or clone the repo and make a checkout
 
 ### Debian
 
@@ -20,20 +24,20 @@ To clone
 git clone -b Mint --single-branch https://gitlab.com/lpg2709/lpg-linux
 ```
 
-### Mint for Work
-
-To clone
-
-```sh
-git clone -b MintW --single-branch https://gitlab.com/lpg2709/lpg-linux
-```
-
 ### Void
 
 To clone
 
 ```sh
 git clone -b Void --single-branch https://gitlab.com/lpg2709/lpg-linux
+```
+
+### Termux
+
+To clone
+
+```sh
+git clone -b Termux --single-branch https://gitlab.com/lpg2709/lpg-linux
 ```
 
 ## Features
