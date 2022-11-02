@@ -5,7 +5,7 @@ DMENU="dmenu-5.0"
 ST="st-0.8.4"
 PROJECT="lpg-linux"
 
-INIT_PACK=("git" "curl" "wget" "vim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
+INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
 POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol")
 
 function printc(){
@@ -84,17 +84,6 @@ cd "$S_FOLDER/$DMENU" && sudo make clean install
 
 printc "  Compile and install [pfetch]\n" "i"
 cd "$SC_FOLDER/pfetch" && sudo make install
-
-printc "  Check if neovim is installed ...\n" "i"
-nvim --version > /dev/null 2>&1
-if [ ! $(echo $?) -eq 0 ]; then
-	printc "  Install nvim\n" "i"
-	git clone https://github.com/neovim/neovim "$USER_HOME/neovim"
-	cd "$USER_HOME/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
-	rm -rf "$USER_HOME/neovim"
-else
-	printc "  neovim is installed. \n" "i"
-fi
 
 printc "  Returning to project folder\n" "i"
 cd "$USER_HOME/$PROJECT"
