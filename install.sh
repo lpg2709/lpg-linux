@@ -54,9 +54,9 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
-printc "  Changing Mirrors to https://repo-us.voidlinux.org/ in USA: Kansas City\n" "i"
+printc "  Changing Mirrors to https://voidlinux.com.br/repo/ in BR: Ouro Preto\n" "i"
 mkdir -p /etc/xbps.d
-echo "repository=https://repo-us.voidlinux.org/current/" > /etc/xbps.d/00-repository-main.conf
+echo "repository=https://voidlinux.com.br/repo/current/" > /etc/xbps.d/00-repository-main.conf
 xbps-install -S
 
 printc "   LOG: Check the repositorys\n" "i"
