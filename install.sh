@@ -54,9 +54,6 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
-printc "  Update apt cache ...\n" "i"
-sudo apt update
-
 printc "  Update system package ...\n" "i"
 sudo apt upgrade -y
 
@@ -70,10 +67,6 @@ SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 
 printc "  Compile and install [pfetch]\n" "i"
 cd "$SC_FOLDER/pfetch" && sudo make install
-
-printc "  Install virtualenv\n" "i"
-pip install virtualenv
-
 
 printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
@@ -103,29 +96,11 @@ else
 	printc "  node and npm is installed. \n" "i"
 fi
 
-printc "  Check if mongodb is installed ...\n" "i"
-mongod --version > /dev/null 2>&1
-if [ ! $(echo $?) -eq 0 ]; then
-	printc "  Installing MongoDB ...\n" "i"
-	wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-	echo "deb [ arch=amd64,arm64  ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
-	sudo apt-get update && sudo apt-get install -y mongodb-org
-	mkdir -p ~/data/db
-	curl https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d | sudo tee /etc/init.d/mongodb >/dev/null
-	sudo chmod +x /etc/init.d/mongodb
-else
-	printc "  mongod is installed. \n" "i"
-fi
-
-# .tmux
-printc "Install config for tmux ...\n" "s"
-bash -c  "$(wget -qO- https://git.io/JCbIh)"
-
 # .config/neovim
-printc "Install config for neovim ...\n" "s"
-git clone https://gitlab.com/lpg2709/neovim-config.git "$USER_HOME/Downloads/neovim-config"
-cd "$USER_HOME/Downloads/neovim-config" && ./install.sh
-rm -rf "$USER_HOME/Downloads/neovim-config"
+printc "Install configurations for nvim and tmux" "s"
+git https://gitlab.com/lpg2709/dotfiles.git "/tmp/dotfiles"
+/tmp/dotfiles/install.sh --nvim --tmux
+rm -rf "/tmp/dotfiles"
 
 printc "Cleaning files ...\n" "s"
 
