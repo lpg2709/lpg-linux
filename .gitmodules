@@ -7,3 +7,6 @@
 [submodule "programs/pfetch"]
 	path = programs/pfetch
 	url = https://gitlab.com/lpg-linux/programs/pfetch.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = https://gitlab.com/lpg2709/dotfiles

@@ -17,6 +17,7 @@ POST_PACK=("tmux" "net-tools" "python3" "htop" "jq" "firefox-esr" "cmake" "tcpdu
 
 PROGRAMS_FOLDER="$USER_HOME/$PROJECT/programs"
 SUCKLESS_FOLDER="$USER_HOME/$PROJECT/suckless"
+DOTFILES_FOLDER="$USER_HOME/$PROJECT/dotfiles"
 
 printc "\nStarting installation...\n" "i"
 
@@ -41,6 +42,9 @@ cd "$PROGRAMS_FOLDER/pfetch" && sudo make install
 
 printc "  Returning to project folder\n" "i"
 cd "$USER_HOME/$PROJECT"
+
+printc "  Install my configs [tmux][neovim]\n" "i"
+/bin/bash "$DOTFILES_FOLDER/install.sh --tmux --nvim"
 
 printc "  Installing programs\n" "i"
 sudo apt install ${POST_PACK[@]} -y
