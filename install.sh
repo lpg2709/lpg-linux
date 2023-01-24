@@ -30,9 +30,9 @@ printc "  Update the system\n" "i"
 sudo apt upgrade -y
 
 printc "  Installing base packages and dependencis\n" "i"
-sudo apt install ${INIT_PACK[@]} -y
+sudo apt install ${DEPS_PACK[@]} -y
 
-printc "  Compile and install\n" "i"
+printc "  Compile and install [st]\n" "i"
 cd "$SUCKLESS_FOLDER/st" && sudo make clean install
 
 printc "  Compile and install [pfetch]\n" "i"
