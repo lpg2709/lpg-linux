@@ -1,0 +1,9 @@
+[submodule "commons"]
+	path = commons
+	url = https://gitlab.com/lpg-linux/scripts/commons.git
+[submodule "suckless/st"]
+	path = suckless/st
+	url = https://gitlab.com/lpg-linux/suckless/st.git
+[submodule "programs/pfetch"]
+	path = programs/pfetch
+	url = https://gitlab.com/lpg-linux/programs/pfetch.git
