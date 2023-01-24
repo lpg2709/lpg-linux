@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 PROJECT="lpg-linux"
 
 # Import other functions
