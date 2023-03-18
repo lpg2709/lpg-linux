@@ -107,6 +107,10 @@ sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 # add .bashrc
 sudo cp "$CF_FOLDER/.bashrc" "$USER_HOME/.bashrc"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.bashrc"
+#
+# Install fonts
+tar -xzf "$USER_HOME/$PROJECT/theme/ProggyCleanNF.tar.gz" -C "/tmp"
+sudo cp "/tmp/ProggyCleanNF/ProggyCleanTT Nerd Font Complete Mono.ttf" "/usr/share/fonts/TTF"
 
 printc "  Creating30-keyboard files, for abnt keyboard\n" "i"
 mkdir -p /etc/X11/xorg.conf.d/
