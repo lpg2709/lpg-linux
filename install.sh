@@ -98,7 +98,7 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 # config all
 printc "  Install my configs\n" "i"
 git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
-/bin/bash "$USER_HOME/dotfiles/install.sh"
+/bin/bash "$USER_HOME/dotfiles/install.sh -a"
 rm -rf "$USER_HOME/dotfiles"
 
 printc "  Creating dwm.desktop files\n" "i"
