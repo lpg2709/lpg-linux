@@ -6,7 +6,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 
-MIRROR_URL="https://void.chililinux.com/voidlinux/current"
+MIRROR_URL="https://repo-fastly.voidlinux.org/current"
 INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
 POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol" "xclip")
 
