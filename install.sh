@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e # Exit if some command return not 0
+
 DWM="dwm-6.2"
 DMENU="dmenu-5.0"
 ST="st-0.8.4"
