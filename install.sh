@@ -61,6 +61,7 @@ fi
 printc "  Changing Mirrors to $MIRROR_URL in BR: Ouro Preto\n" "i"
 mkdir -p /etc/xbps.d
 echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
+echo "repository=$MIRROR_URL/nonfree" > /etc/xbps.d/10-repository-nonfree.conf
 xbps-install -S
 
 printc "   LOG: Check the repositorys\n" "i"
