@@ -9,8 +9,9 @@ PROJECT="lpg-linux"
 
 
 MIRROR_URL="https://repo-fastly.voidlinux.org/current"
-INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "font-awesome" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
-POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "Thunar" "baobab" "gnome-disk-utility" "pavucontrol" "xclip")
+INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
+POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "gvfs-smb" "gvfs" "thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "baobab" "gnome-disk-utility" "pavucontrol" "xclip")
+
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
