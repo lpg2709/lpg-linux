@@ -2,7 +2,7 @@
 
 set -e # Exit if some command return not 0
 
-DWM="dwm-6.2"
+DWM="dwm-6.4"
 DMENU="dmenu-5.0"
 ST="st-0.8.4"
 PROJECT="lpg-linux"
@@ -81,11 +81,11 @@ SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 printc "  Creating some folders\n" "i"
 xdg-user-dirs-update
 
-printc "  Compile and install [dwm-6.2]\n" "i"
+printc "  Compile and install [$DWM]\n" "i"
 cd "$S_FOLDER/$DWM" && sudo make clean install
-printc "  Compile and install [st-0.8.4]\n" "i"
+printc "  Compile and install [$ST]\n" "i"
 cd "$S_FOLDER/$ST" && sudo make clean install
-printc "  Compile and install [dmenu-5.0]\n" "i"
+printc "  Compile and install [$DMENU]\n" "i"
 cd "$S_FOLDER/$DMENU" && sudo make clean install
 
 printc "  Compile and install [pfetch]\n" "i"

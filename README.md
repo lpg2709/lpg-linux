@@ -19,7 +19,7 @@ On finished, logout from session and select DWM on greeter.
 
 ## Features
 
-- [dwm 6.8](https://dwm.suckless.org/)
+- [dwm 6.4](https://dwm.suckless.org/)
 - [st 0.8.4](https://st.suckless.org/)
 - [dmenu 5.0](https://tools.suckless.org/dmenu/)
 - [GUI Gruvbox Theme by TheGreatMcPain](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
