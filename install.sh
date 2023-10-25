@@ -10,7 +10,7 @@ PROJECT="lpg-linux"
 
 MIRROR_URL="https://repo-fastly.voidlinux.org/current"
 INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
-POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "gvfs-smb" "gvfs" "thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "baobab" "gnome-disk-utility" "pavucontrol" "xclip")
+POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "gvfs" "thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "tumbler" "baobab" "gnome-disk-utility" "pavucontrol" "xclip" "xarchiver")
 
 
 function printc(){
@@ -163,6 +163,9 @@ echo "set enable-keypad on" >> ~/.inputrc
 printc "  Fixing .Xauthority\n" "i"
 touch ~/.Xauthority
 xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+
+printc "  Fixing gvfs start with dbus session; For Thunar advanced things\n" "i"
+sudo sed -i "s/exec $@/exec dbus-run-session $@/" /etc/lightdm/Xsession
 
 # printc "Cleaning files and prepering for reboot\n" "s"
 
