@@ -5,13 +5,6 @@ dwm_date(){
 	echo "[  ${DATA} ]"
 }
 
-dwm_weather() {
-    LOCATION=Curitiba
-
-	DATA=$(curl -s wttr.in/$LOCATION?format=1 | grep -o ".[0-9].*")
-	echo "[ ${DATA} ]"
-}
-
 dwm_hdd(){
 	free="$(df -h /home | grep /dev | awk '{print $3}')"
 	total="$(df -h /home | grep /dev | awk '{print $2}')"
@@ -46,18 +39,16 @@ dwm_resources () {
 	fi
 }
 
-count_weather=0
+count_1h=0
 count_hdd=0
-weather="$(dwm_weather)"
 hdd="$(dwm_hdd)"
 pkgupdate="$(dwm_pkgupdates)"
 
 while true; do
 	# to diferent time the count is [sleep_time * x = amount_of_time_in_minutes]
-	if [ "$count_weather" -gt 1800 ]; then # 1 h
-		weather="$(dwm_weather)"
+	if [ "$count_1h" -gt 1800 ]; then # 1 h
 		pkgupdate="$(dwm_pkgupdates)"
-		count_weather=0
+		count_1h=0
 	fi
 
 	if [ "$count_hdd" -gt 900 ]; then # 30 min
@@ -65,9 +56,9 @@ while true; do
 		count_hdd=0
 	fi
 
-	count_weather=$((count_weather + 1))
+	count_1h=$((count_1h + 1))
 	count_hdd=$((count_hdd + 1))
-	xsetroot -name "$(dwm_resources) $hdd $pkgupdate $weather $(dwm_date)"
+	xsetroot -name "$(dwm_resources) $hdd $pkgupdate $(dwm_date)"
 	sleep 2s
 done &
 

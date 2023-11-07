@@ -4,7 +4,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-alias ll='ls -laH'
+alias ll='ls -lah'
 
 alias so='source ~/.bashrc'
 # PS1='[\u@\h \W]\$ '
