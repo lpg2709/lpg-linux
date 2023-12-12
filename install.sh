@@ -80,9 +80,11 @@ printc "  Check if node and npm is installed ...\n" "i"
 node --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-	echo 'export NVM_DIR="$USER_HOME/.nvm"' >> $USER_HOME/.bashrc
-	echo '[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> $USER_HOME/.bashrc
-	echo '[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> $USER_HOME/.bashrc
+	if [ -z "$NVM_DIR" ]; then
+		echo 'export NVM_DIR="$USER_HOME/.nvm"' >> $USER_HOME/.bashrc
+		echo '[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> $USER_HOME/.bashrc
+		echo '[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> $USER_HOME/.bashrc
+	fi
 	source $USER_HOME/.bashrc
 	nvm install 14.18.1
 else
