@@ -83,6 +83,24 @@ if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	rm -rf "/tmp/dotfiles"
 fi
 
+printc "Creating some alias ...\n" "s"
+if ! command -v so; then
+	echo "alias so='source ~/.bashrc'" >> $USER_HOME/.bashrc
+fi
+
+if ! command -v thunar; then
+	echo "alias thunar='explorer.exe'" >> $USER_HOME/.bashrc
+fi
+
+if ! command -v cmd; then
+	echo "alias cmd='cmd.exe'" >> $USER_HOME/.bashrc
+fi
+
+if ! command -v cls; then
+	echo "alias cls='clear'" >> $USER_HOME/.bashrc
+fi
+printc "Done\n" "s"
+
 printc "Cleaning files ...\n" "s"
 
 sudo apt autoremove
