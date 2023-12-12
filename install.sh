@@ -83,14 +83,15 @@ if [ ! $(echo $?) -eq 0 ]; then
 	export NVM_DIR="$USER_HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 	[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+	source ~/.bashrc
 	nvm install 14.18.1
 else
 	printc "  node and npm is installed. \n" "i"
 fi
 
 # .config/neovim
-printc "Install configurations for nvim and tmux" "s"
-git https://gitlab.com/lpg2709/dotfiles.git "/tmp/dotfiles"
+printc "Install configurations for nvim and tmux\n" "s"
+git clone https://gitlab.com/lpg2709/dotfiles.git "/tmp/dotfiles"
 /tmp/dotfiles/install.sh --nvim --tmux --vim
 rm -rf "/tmp/dotfiles"
 
