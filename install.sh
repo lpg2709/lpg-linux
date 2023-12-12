@@ -55,7 +55,7 @@ if [ ! -d "$USER_HOME" ]; then
 fi
 
 printc "  Update system package ...\n" "i"
-sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 printc "  Installing base packages\n" "i"
 sudo apt install ${INIT_PACK[@]} -y
@@ -83,10 +83,10 @@ printc "  Check if node and npm is installed ...\n" "i"
 node --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
 	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	export NVM_DIR="$USER_HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-	[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-	nvm install 14.18.1
+	# export NVM_DIR="$USER_HOME/.nvm"
+	# [ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	# [ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+	# nvm install 14.18.1
 else
 	printc "  node and npm is installed. \n" "i"
 fi
