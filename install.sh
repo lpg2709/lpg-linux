@@ -5,7 +5,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
+DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump")
 NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen" "ripgrep")
 
 function printc(){
@@ -63,11 +63,6 @@ sudo apt install ${INIT_PACK[@]} -y
 printc "  Installing dependencis\n" "i"
 sudo apt install ${DEPS_PACK[@]} -y
 
-SC_FOLDER="$USER_HOME/$PROJECT/scripts"
-
-printc "  Compile and install [pfetch]\n" "i"
-cd "$SC_FOLDER/pfetch" && sudo make install
-
 printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
@@ -99,7 +94,7 @@ fi
 # .config/neovim
 printc "Install configurations for nvim and tmux" "s"
 git https://gitlab.com/lpg2709/dotfiles.git "/tmp/dotfiles"
-/tmp/dotfiles/install.sh --nvim --tmux
+/tmp/dotfiles/install.sh --nvim --tmux --vim
 rm -rf "/tmp/dotfiles"
 
 printc "Cleaning files ...\n" "s"
