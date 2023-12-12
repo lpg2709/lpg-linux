@@ -5,7 +5,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump")
+DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
 NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen" "ripgrep")
 
 function printc(){
@@ -68,9 +68,6 @@ nvim --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
 	printc "  Installing nvim dependencis\n" "i"
 	sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
-
-	# TODO: Correção de erro na instalação do NEOVIM
-	#   shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
 	printc "  Install nvim\n" "i"
 	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
 	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
@@ -82,11 +79,11 @@ fi
 printc "  Check if node and npm is installed ...\n" "i"
 node --version > /dev/null 2>&1
 if [ ! $(echo $?) -eq 0 ]; then
-	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	# export NVM_DIR="$USER_HOME/.nvm"
-	# [ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-	# [ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-	# nvm install 14.18.1
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	export NVM_DIR="$USER_HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+	nvm install 14.18.1
 else
 	printc "  node and npm is installed. \n" "i"
 fi
