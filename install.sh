@@ -108,6 +108,17 @@ SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 printc "  Creating some folders\n" "i"
 sudo xdg-user-dirs-update
 
+if [ ! -d "$USER_HOME/.config" ];then
+	printc "  Creating .config for current user\n" "i"
+	sudo mkdir "$USER_HOME/.config"
+	sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
+fi
+
+if [ ! -d "/root/.config" ];then
+	printc "  Creating .config for root\n" "i"
+	sudo mkdir "/root/.config"
+fi
+
 printc "  Compile and install [$DWM]\n" "i"
 cd "$S_FOLDER/$DWM" && sudo make clean install
 printc "  Compile and install [$ST]\n" "i"
@@ -125,6 +136,9 @@ printc "  Creating configurations files\n" "i"
 # .dwm autostart
 cp -r "$CF_FOLDER/.dwm" "$USER_HOME/"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
+
+printc "  Setting shell for root as /bin/bash\n" "i"
+sudo chsh -s /bin/bash
 
 # config all
 printc "  Install my configs\n" "i"
