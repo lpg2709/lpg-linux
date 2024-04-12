@@ -59,29 +59,43 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
+printc "  Checking mirror\n" "i"
 printc "  Changing Mirrors to $MIRROR_URL\n" "i"
 if [ ! -d "/etc/xbps.d" ]; then
+	printc "    Nothing found creating all ..." "i"
 	mkdir -p /etc/xbps.d
-fi
-if [ -f "/etc/xbps.d/00-repository-main.conf" ]; then
-	if [ $(cat "/etc/xbps.d/00-repository-main.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
-		echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
-	fi
-else
 	echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
-fi
-
-if [ -f "/etc/xbps.d/10-repository-nonfree.conf" ]; then
-	if [ $(cat "/etc/xbps.d/10-repository-nonfree.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
-		echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
-	fi
-else
 	echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
-fi
-xbps-install -S
+	xbps-install -S
+	xbps-query -L
+	printc "  DONE\n" "i"
+else
+	mr_ch=0
+	if [ -f "/etc/xbps.d/00-repository-main.conf" ]; then
+		if [ $(cat "/etc/xbps.d/00-repository-main.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
+			echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
+			mr_ch=1
+		fi
+	else
+		echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
+		mr_ch=1
+	fi
 
-printc "   LOG: Check the repositorys\n" "i"
-xbps-query -L
+	if [ -f "/etc/xbps.d/10-repository-nonfree.conf" ]; then
+		if [ $(cat "/etc/xbps.d/10-repository-nonfree.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
+			echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
+			mr_ch=1
+		fi
+	else
+		echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
+		mr_ch=1
+	fi
+	if [ $mr_ch -eq 1 ];then
+		xbps-install -S
+		printc "   Check the repositorys\n" "i"
+		xbps-query -L
+	fi
+fi
 
 printc "  Update the system\n" "i"
 xbps-install -Suy
