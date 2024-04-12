@@ -7,11 +7,9 @@ DMENU="dmenu-5.0"
 ST="st-0.8.4"
 PROJECT="lpg-linux"
 
-
 MIRROR_URL="https://repo-fastly.voidlinux.org/current"
 INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
 POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "gvfs" "Thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "tumbler" "baobab" "gnome-disk-utility" "pavucontrol" "xclip" "xarchiver")
-
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
@@ -104,11 +102,11 @@ printc "  Installing base packages and dependencis\n" "i"
 sudo xbps-install -Sy ${INIT_PACK[@]}
 
 S_FOLDER="$USER_HOME/$PROJECT/suckless"
-CF_FOLDER="$USER_HOME/$PROJECT/config-files"
+CF_FOLDER="$USER_HOME/$PROJECT/configs"
 SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 
 printc "  Creating some folders\n" "i"
-xdg-user-dirs-update
+sudo xdg-user-dirs-update
 
 printc "  Compile and install [$DWM]\n" "i"
 cd "$S_FOLDER/$DWM" && sudo make clean install
@@ -134,24 +132,29 @@ git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
 /bin/bash "$USER_HOME/dotfiles/install.sh" "--all"
 rm -rf "$USER_HOME/dotfiles"
 
+# dwm entry for lightdm
 printc "  Creating dwm.desktop files\n" "i"
-# dwm entry
-if [ ! -d "/usr/share/xsessions" ]; then
-	mkdir "/usr/share/xsessions"
-fi
-sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
+sudo cp -r "$CF_FOLDER/xsessions" "/usr/share/"
 
 # add .bashrc
+printc "  Copy .bashrc\n" "i"
 sudo cp "$CF_FOLDER/.bashrc" "$USER_HOME/.bashrc"
+sudo cp "$CF_FOLDER/.bashrc" "/root/.bashrc"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.bashrc"
 
+# Set default applications for thunar
+printc "  Copy helpers for xfce4\n" "i"
+sudo -r "$CF_FOLDER/xfce4" "$USER_HOME/.config/"
+
 # Install fonts
+printc "  Installing font\n" "i"
 tar -xzf "$USER_HOME/$PROJECT/theme/ProggyCleanNF.tar.gz" -C "/tmp"
 sudo cp "/tmp/ProggyCleanNF/ProggyCleanTT Nerd Font Complete Mono.ttf" "/usr/share/fonts/TTF"
 
+# Setting keyboard
 printc "  Creating30-keyboard files, for abnt keyboard\n" "i"
-mkdir -p /etc/X11/xorg.conf.d/
-sudo cp "$CF_FOLDER/30-keyboard.conf" "/etc/X11/xorg.conf.d/"
+mkdir -p /etc/X11/
+sudo cp -r "$CF_FOLDER/xorg.conf.d" "/etc/X11/"
 
 # theme config
 printc "  Setting Gruvbox-Material-Dark to lightdm-greeter\n" "i"
