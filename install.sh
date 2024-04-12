@@ -185,9 +185,13 @@ if [ $(ls "/usr/share/icons" | grep Gruvbox | wc -l) -eq 0 ]; then
 fi
 
 printc "  Setup Gruvbox theme\n" "i"
-mkdir -p "$USER_HOME/.config/gtk-3.0" # for the current user
+if [ ! -d "$USER_HOME/.config/gtk-3.0"]; then
+	mkdir -p "$USER_HOME/.config/gtk-3.0" # for the current user
+fi
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
-mkdir -p "/root/.config/gtk-3.0" # for root
+if [ ! -d "/root/.config/gtk-3.0"]; then
+	mkdir -p "/root/.config/gtk-3.0" # for root
+fi
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "/root/.config/gtk-3.0/"
 
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
@@ -195,9 +199,14 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
 printc "  Installing programs\n" "i"
 sudo xbps-install -Sy ${POST_PACK[@]} -y
 
-printc "  Setup lightdm to start on boot\n" "i"
-ln -s /etc/sv/dbus /var/service
-ln -s /etc/sv/lightdm /var/service
+if [ ! -L "/var/service/dbus" ]; then
+	printc "  Setup dbus service\n" "i"
+	ln -s /etc/sv/dbus /var/service
+fi
+if [ ! -L "/var/service/lightdm" ]; then
+	printc "  Setup lightdm service\n" "i"
+	ln -s /etc/sv/lightdm /var/service
+fi
 
 printc "  Fix delete key on st\n" "i"
 echo "set enable-keypad on" >> ~/.inputrc
@@ -208,10 +217,6 @@ xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 
 printc "  Fixing gvfs start with dbus session; For Thunar advanced things\n" "i"
 sudo sed -i "s/exec $@/exec dbus-run-session $@/" /etc/lightdm/Xsession
-
-# printc "Cleaning files and prepering for reboot\n" "s"
-
-# sudo apt autoremove
 
 printc "\nInstalation finished \\o/\n" "s"
 
