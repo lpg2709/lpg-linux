@@ -59,10 +59,25 @@ if [ ! -d "$USER_HOME" ]; then
 	exit 1
 fi
 
-printc "  Changing Mirrors to $MIRROR_URL in BR: Ouro Preto\n" "i"
-mkdir -p /etc/xbps.d
-echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
-echo "repository=$MIRROR_URL/nonfree" > /etc/xbps.d/10-repository-nonfree.conf
+printc "  Changing Mirrors to $MIRROR_URL\n" "i"
+if [ ! -d "/etc/xbps.d"]; then
+	mkdir -p /etc/xbps.d
+fi
+if [ -f "/etc/xbps.d/00-repository-main.conf" ]; then
+	if [ $(cat "/etc/xbps.d/00-repository-main.conf" | grep $MIRROR_URL | wc -l) -lt 1]; then
+		echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
+	fi
+else
+	echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
+fi
+
+if [ -f "/etc/xbps.d/10-repository-nonfree.conf" ]; then
+	if [ $(cat "/etc/xbps.d/10-repository-nonfree.conf" | grep $MIRROR_URL | wc -l) -lt 1]; then
+		echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
+	fi
+else
+	echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
+fi
 xbps-install -S
 
 printc "   LOG: Check the repositorys\n" "i"
