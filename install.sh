@@ -105,7 +105,8 @@ S_FOLDER="$USER_HOME/$PROJECT/suckless"
 CF_FOLDER="$USER_HOME/$PROJECT/configs"
 SC_FOLDER="$USER_HOME/$PROJECT/scripts"
 
-printc "  Creating some folders\n" "i"
+printc "  Creating some folders for '${SUDO_USER}'\n" "i"
+runuser -l ${SUDO_USER} -c xdg-user-dirs-update
 sudo xdg-user-dirs-update
 
 if [ ! -d "$USER_HOME/.config" ];then
@@ -140,7 +141,7 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 printc "  Setting shell for root as /bin/bash\n" "i"
 sudo chsh -s /bin/bash
 
-# config all
+# Configs dot files - nvim - tmux - etc
 printc "  Install my configs\n" "i"
 git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
 /bin/bash "$USER_HOME/dotfiles/install.sh" "--all"
