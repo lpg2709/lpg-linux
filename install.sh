@@ -144,7 +144,7 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.bashrc"
 
 # Set default applications for thunar
 printc "  Copy helpers for xfce4\n" "i"
-sudo -r "$CF_FOLDER/xfce4" "$USER_HOME/.config/"
+sudo cp -r "$CF_FOLDER/xfce4" "$USER_HOME/.config/"
 
 # Install fonts
 printc "  Installing font\n" "i"
