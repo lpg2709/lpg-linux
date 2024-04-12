@@ -60,9 +60,8 @@ if [ ! -d "$USER_HOME" ]; then
 fi
 
 printc "  Checking mirror\n" "i"
-printc "  Changing Mirrors to $MIRROR_URL\n" "i"
 if [ ! -d "/etc/xbps.d" ]; then
-	printc "    Nothing found creating all ..." "i"
+	printc "    Nothing found. Changing Mirrors to $MIRROR_URL ..." "i"
 	mkdir -p /etc/xbps.d
 	echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
 	echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
@@ -91,6 +90,7 @@ else
 		mr_ch=1
 	fi
 	if [ $mr_ch -eq 1 ];then
+		printc "    Changing Mirrors to $MIRROR_URL.\n" "i"
 		xbps-install -S
 		printc "   Check the repositorys\n" "i"
 		xbps-query -L
@@ -136,13 +136,15 @@ rm -rf "$USER_HOME/dotfiles"
 
 printc "  Creating dwm.desktop files\n" "i"
 # dwm entry
-mkdir "/usr/share/xsessions"
+if [ ! -d "/usr/share/xsessions" ]; then
+	mkdir "/usr/share/xsessions"
+fi
 sudo cp "$CF_FOLDER/dwm.desktop" "/usr/share/xsessions/"
 
 # add .bashrc
 sudo cp "$CF_FOLDER/.bashrc" "$USER_HOME/.bashrc"
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.bashrc"
-#
+
 # Install fonts
 tar -xzf "$USER_HOME/$PROJECT/theme/ProggyCleanNF.tar.gz" -C "/tmp"
 sudo cp "/tmp/ProggyCleanNF/ProggyCleanTT Nerd Font Complete Mono.ttf" "/usr/share/fonts/TTF"
@@ -164,14 +166,23 @@ cp "$SC_FOLDER/pmenu" "/bin/pmenu"
 cp "$SC_FOLDER/helpdwm" "/bin/helpdwm"
 cp -r "$SC_FOLDER/dwm-help" "/bin/dwm-help"
 
-printc "  Copy wallpapers\n" "i"
-sudo mkdir -p "/usr/share/wallpapers/$PROJECT"
-sudo cp -a "$USER_HOME/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/$PROJECT"
+if [ ! -d "/usr/share/wallpapers/$PROJECT" ]; then
+	printc "  Copy wallpapers\n" "i"
+	sudo mkdir -p "/usr/share/wallpapers/$PROJECT"
+	sudo cp -a "$USER_HOME/$PROJECT/img/wallpapers/." "/usr/share/wallpapers/$PROJECT"
+fi
 
-printc "  Copy Gruvbox theme\n" "i"
-sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/themes/." "/usr/share/themes"
-sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/icons/." "/usr/share/icons"
-sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
+if [ $(ls "/usr/share/themes" | grep Gruvbox | wc -l) -eq 0 ]; then
+	printc "  Copy Gruvbox theme\n" "i"
+	sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/themes/." "/usr/share/themes"
+fi
+
+if [ $(ls "/usr/share/icons" | grep Gruvbox | wc -l) -eq 0 ]; then
+	printc "  Copy Gruvbox icons\n" "i"
+	sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/icons/." "/usr/share/icons"
+	printc "  Updating icons cache\n" "i"
+	sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
+fi
 
 printc "  Setup Gruvbox theme\n" "i"
 mkdir -p "$USER_HOME/.config/gtk-3.0" # for the current user
