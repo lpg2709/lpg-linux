@@ -185,11 +185,11 @@ if [ $(ls "/usr/share/icons" | grep Gruvbox | wc -l) -eq 0 ]; then
 fi
 
 printc "  Setup Gruvbox theme\n" "i"
-if [ ! -d "$USER_HOME/.config/gtk-3.0"]; then
+if [ ! -d "$USER_HOME/.config/gtk-3.0" ]; then
 	mkdir -p "$USER_HOME/.config/gtk-3.0" # for the current user
 fi
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
-if [ ! -d "/root/.config/gtk-3.0"]; then
+if [ ! -d "/root/.config/gtk-3.0" ]; then
 	mkdir -p "/root/.config/gtk-3.0" # for root
 fi
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "/root/.config/gtk-3.0/"
