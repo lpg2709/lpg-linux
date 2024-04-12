@@ -145,8 +145,10 @@ sudo cp -rf "$USER_HOME/$PROJECT/theme/gruvbox-material-gtk/icons/." "/usr/share
 sudo gtk-update-icon-cache "/usr/share/icons/Gruvbox-Material-Dark"
 
 printc "  Setup Gruvbox theme\n" "i"
-mkdir -p "$USER_HOME/.config/gtk-3.0"
+mkdir -p "$USER_HOME/.config/gtk-3.0" # for the current user
 cp "$CF_FOLDER/gtk-3.0/settings.ini" "$USER_HOME/.config/gtk-3.0/"
+mkdir -p "/root/.config/gtk-3.0" # for root
+cp "$CF_FOLDER/gtk-3.0/settings.ini" "/root/.config/gtk-3.0/"
 
 sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
 
