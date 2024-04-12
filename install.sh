@@ -227,7 +227,8 @@ if [ ! -L "/var/service/lightdm" ]; then
 fi
 
 printc "  Fix delete key on st\n" "i"
-echo "set enable-keypad on" >> ~/.inputrc
+echo "set enable-keypad on" >> $USER_HOME/.inputrc
+echo "set enable-keypad on" >> /root/.inputrc
 
 printc "  Fixing .Xauthority\n" "i"
 touch ~/.Xauthority
