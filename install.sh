@@ -141,6 +141,13 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 printc "  Setting shell for root as /bin/bash\n" "i"
 sudo chsh -s /bin/bash
 
+if [ $(sudo grep "NOPASSWD: /bin/shutdown" /etc/sudoers | wc -l) -eq 0 ]; then
+	printc "  Remove password for grou wheel for command shutdown\n" "i"
+	sudo echo "## Remove password for shutdown command for users on group of wheel" >> /etc/sudoers
+	sudo echo "%wheel ALL=(ALL:ALL) NOPASSWD: /bin/shutdown" >> /etc/sudoers
+fi
+
+
 # Configs dot files - nvim - tmux - etc
 printc "  Install my configs\n" "i"
 git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
