@@ -60,11 +60,11 @@ if [ ! -d "$USER_HOME" ]; then
 fi
 
 printc "  Changing Mirrors to $MIRROR_URL\n" "i"
-if [ ! -d "/etc/xbps.d"]; then
+if [ ! -d "/etc/xbps.d" ]; then
 	mkdir -p /etc/xbps.d
 fi
 if [ -f "/etc/xbps.d/00-repository-main.conf" ]; then
-	if [ $(cat "/etc/xbps.d/00-repository-main.conf" | grep $MIRROR_URL | wc -l) -lt 1]; then
+	if [ $(cat "/etc/xbps.d/00-repository-main.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
 		echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
 	fi
 else
@@ -72,7 +72,7 @@ else
 fi
 
 if [ -f "/etc/xbps.d/10-repository-nonfree.conf" ]; then
-	if [ $(cat "/etc/xbps.d/10-repository-nonfree.conf" | grep $MIRROR_URL | wc -l) -lt 1]; then
+	if [ $(cat "/etc/xbps.d/10-repository-nonfree.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
 		echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
 	fi
 else
