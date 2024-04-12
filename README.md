@@ -1,21 +1,27 @@
-# lpgMint
+# Void
 
-Installation of my environment using Mint as a base.
+Installation of my environment using Void as a base.
 
 ## Install
 
-Install Linux Mint, I recomend use XFCE.
+Install Void Linux base.
 
 With the installation finished, login open the terminal and run the follow
 commands:
 
 ```sh
-sudo apt install git
-git clone https://github.com/lpg2709/lpgMint ~/lpgMint
-cd lpgMint && sudo ./install.sh
+sudo xbps-install -Rsy git
+git clone https://github.com/lpg2709/lpg-linux
+cd lpg-linux
+git checkout Void
+sudo ./install.sh
 ```
 
-On finished, logout from session and select DWM on greeter.
+On finished, reboot: 
+
+```sh
+sudo shutdown -r now
+```
 
 ## Features
 
@@ -26,17 +32,9 @@ On finished, logout from session and select DWM on greeter.
 - [feh](https://feh.finalrewind.org/)
 - [pfetch](https://github.com/dylanaraps/pfetch)
 
-## Customisation
-
-The lpgMint repository is saved in the home, to customize it, just change the
-necessary files and run the installation script again.
-
-If the customisation is on dwm suite, you can simple run ```sudo make install```
-direct on folder of the tool.
-
 ### Project directories
 
-- dot-files: configuration files for tmux, vim and gtk3 theme.
+- config: configuration files
 - img: Wallpaper images.
 - scripts: Scripts and useful executables,
   - fehbg: setup the backgroud image.
