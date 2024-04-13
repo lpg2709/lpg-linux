@@ -242,7 +242,6 @@ echo "set enable-keypad on" >> /root/.inputrc
 
 printc "  Fixing .Xauthority\n" "i"
 touch $USER_HOME/.Xauthority
-touch /root/.Xauthority
 xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 
 printc "  Fixing gvfs start with dbus session; For Thunar advanced things\n" "i"
