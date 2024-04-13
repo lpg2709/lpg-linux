@@ -141,6 +141,9 @@ sudo chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.dwm"
 printc "  Setting shell for root as /bin/bash\n" "i"
 sudo chsh -s /bin/bash
 
+printc "  Setting enviroment variable to fix java apps\n" "i"
+echo "_JAVA_AWT_WM_NONREPARENTING=1" >> /etc/environment
+
 if [ $(sudo grep "NOPASSWD: /bin/shutdown" /etc/sudoers | wc -l) -eq 0 ]; then
 	printc "  Remove password for grou wheel for command shutdown\n" "i"
 	sudo echo "## Remove password for shutdown command for users on group of wheel" >> /etc/sudoers

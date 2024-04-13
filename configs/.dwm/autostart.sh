@@ -63,4 +63,3 @@ while true; do
 done &
 
 fehbg
-exec dwm
