@@ -14,7 +14,7 @@ dwm_hdd(){
 }
 
 dwm_pkgupdates() {
-	upgrds="$(xbps-install -un | cut -d' ' -f2 | grep update | wc -l)"
+	upgrds="$(xbps-install -Sun | cut -d' ' -f2 | grep update | wc -l)"
 	total="$(xbps-query -l | wc -l)"
 
 	echo "[  $upgrds/$total ]"
