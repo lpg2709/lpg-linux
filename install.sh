@@ -8,7 +8,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
-POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "gvfs" "Thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "tumbler" "baobab" "gnome-disk-utility" "pavucontrol" "xclip" "xarchiver" "elogind" "ntfs-3g")
+POST_PACK=("tmux" "net-tools" "htop" "jq" "firefox-esr" "gvfs" "Thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "tumbler" "gnome-disk-utility" "pavucontrol" "xclip" "xarchiver" "elogind" "ntfs-3g")
 
 function printc(){
 	CLEAR_COLOR="\033[0m"
