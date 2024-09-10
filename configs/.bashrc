@@ -27,3 +27,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
+eval "$(fzf --bash)"
