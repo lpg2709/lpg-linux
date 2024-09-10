@@ -7,7 +7,6 @@ DMENU="dmenu-5.0"
 ST="st-0.8.4"
 PROJECT="lpg-linux"
 
-MIRROR_URL="https://repo-fastly.voidlinux.org/current"
 INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")
 POST_PACK=("tmux" "net-tools" "htop" "jq" "tcpdump" "firefox-esr" "gvfs" "Thunar" "thunar-archive-plugin" "thunar-volman" "thunar-media-tags-plugin" "tumbler" "baobab" "gnome-disk-utility" "pavucontrol" "xclip" "xarchiver" "elogind" "ntfs-3g")
 
@@ -55,44 +54,6 @@ printc "  Current user home: $USER_HOME\n" "l"
 if [ ! -d "$USER_HOME" ]; then
 	printc "User not found!\n" "e"
 	exit 1
-fi
-
-printc "  Checking mirror\n" "i"
-if [ ! -d "/etc/xbps.d" ]; then
-	printc "    Nothing found. Changing Mirrors to $MIRROR_URL ..." "i"
-	mkdir -p /etc/xbps.d
-	echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
-	echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
-	xbps-install -S
-	xbps-query -L
-	printc "  DONE\n" "i"
-else
-	mr_ch=0
-	if [ -f "/etc/xbps.d/00-repository-main.conf" ]; then
-		if [ $(cat "/etc/xbps.d/00-repository-main.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
-			echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
-			mr_ch=1
-		fi
-	else
-		echo "repository=$MIRROR_URL" > /etc/xbps.d/00-repository-main.conf
-		mr_ch=1
-	fi
-
-	if [ -f "/etc/xbps.d/10-repository-nonfree.conf" ]; then
-		if [ $(cat "/etc/xbps.d/10-repository-nonfree.conf" | grep $MIRROR_URL | wc -l) -lt 1 ]; then
-			echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
-			mr_ch=1
-		fi
-	else
-		echo "repository=$MIRROR_URL" > /etc/xbps.d/10-repository-nonfree.conf
-		mr_ch=1
-	fi
-	if [ $mr_ch -eq 1 ];then
-		printc "    Changing Mirrors to $MIRROR_URL.\n" "i"
-		xbps-install -S
-		printc "   Check the repositorys\n" "i"
-		xbps-query -L
-	fi
 fi
 
 printc "  Update the system\n" "i"
