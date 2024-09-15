@@ -4,7 +4,7 @@ set -e # Exit if some command return not 0
 
 DWM="dwm-6.4"
 DMENU="dmenu-5.0"
-ST="st-0.8.4"
+ST="st-0.9.2"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget" "vim" "neovim" "make" "cmake" "base-devel" "libX11-devel" "libXft-devel" "libXinerama-devel" "feh" "xorg" "xdg-user-dirs" "lightdm" "lightdm-gtk3-greeter" "pulseaudio")

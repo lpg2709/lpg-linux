@@ -17,7 +17,7 @@ git checkout Void
 sudo ./install.sh
 ```
 
-On finished, reboot: 
+On finished, reboot:
 
 ```sh
 sudo shutdown -r now
@@ -26,7 +26,7 @@ sudo shutdown -r now
 ## Features
 
 - [dwm 6.4](https://dwm.suckless.org/)
-- [st 0.8.4](https://st.suckless.org/)
+- [st 0.9.2](https://st.suckless.org/)
 - [dmenu 5.0](https://tools.suckless.org/dmenu/)
 - [GUI Gruvbox Theme by TheGreatMcPain](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
 - [feh](https://feh.finalrewind.org/)
