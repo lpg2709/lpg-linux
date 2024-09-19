@@ -1,11 +1,12 @@
 #!/bin/bash
-DWM="dwm-6.3"
-DMENU="dmenu-5.0"
-ST="st-0.8.4"
+
 PROJECT="lpg-linux"
+NVIM_VERSION="stable"
+FZF_VERSION="0.55.0"
+FZF_ARCH="amd64"
 
 INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip" "fzf")
+DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
 NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen" "ripgrep")
 
 function printc(){
@@ -70,7 +71,7 @@ if [ ! $(echo $?) -eq 0 ]; then
 	sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
 	printc "  Install nvim\n" "i"
 	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
-	cd "$USER_HOME/Downloads/neovim" && git checkout stable && make CMAKE_BUILD_TYPE=Release && sudo make install
+	cd "$USER_HOME/Downloads/neovim" && git checkout "$NVIM_VERSION" && make CMAKE_BUILD_TYPE=Release && sudo make install
 	rm -rf "$USER_HOME/Downloads/neovim"
 else
 	printc "  neovim is installed. \n" "i"
@@ -82,6 +83,11 @@ if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	/tmp/dotfiles/install.sh --nvim --tmux --vim
 	rm -rf "/tmp/dotfiles"
 fi
+
+printc "Installing fzf\n" "s"
+
+cd /tmp && wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
+sudo tar xf "/tmp/fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz" -C "/opt/fzf-${FZF_VERSION}-linux_${FZF_ARCH}"
 
 printc "Creating some alias ...\n" "s"
 if ! command -v so; then
@@ -100,7 +106,8 @@ if ! command -v cls; then
 	echo "alias cls='clear'" >> $USER_HOME/.bashrc
 fi
 
-echo 'if command -v fzf; then eval "$(fzf --bash)" fi' >> $USER_HOME/.bashrc
+echo -e 'if command -v fzf; then \n\teval "$(fzf --bash)" \nfi' >> $USER_HOME/.bashrc
+echo -e "PATH='/opt/fzf-${FZF_VERSION}-linux_${FZF_ARCH}'" >> $USER_HOME/.bashrc
 
 printc "Done\n" "s"
 
