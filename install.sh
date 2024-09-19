@@ -108,7 +108,7 @@ if ! command -v cls; then
 	echo "alias cls='clear'" >> $USER_HOME/.bashrc
 fi
 
-echo -e 'if command -v fzf; then \n\teval "$(fzf --bash)" \nfi' >> $USER_HOME/.bashrc
+echo -e 'if command -v fzf &> /dev/null; then \n\teval "$(fzf --bash)" \nfi' >> $USER_HOME/.bashrc
 
 printc "Done\n" "s"
 
