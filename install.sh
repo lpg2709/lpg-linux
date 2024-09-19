@@ -1,12 +1,12 @@
 #!/bin/bash
 
 PROJECT="lpg-linux"
+
 NVIM_VERSION="stable"
 FZF_VERSION="0.55.0"
 FZF_ARCH="amd64"
 
-INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
+PACKAGES=("curl" "wget" "vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
 NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen" "ripgrep")
 
 function printc(){
@@ -58,11 +58,8 @@ fi
 printc "  Update system package ...\n" "i"
 sudo apt update && sudo apt upgrade -y
 
-printc "  Installing base packages\n" "i"
-sudo apt install ${INIT_PACK[@]} -y
-
-printc "  Installing dependencis\n" "i"
-sudo apt install ${DEPS_PACK[@]} -y
+printc "  Installing packages\n" "i"
+sudo apt install ${PACKAGES[@]} -y
 
 printc "  Check if neovim is installed ...\n" "i"
 nvim --version > /dev/null 2>&1
@@ -70,9 +67,9 @@ if [ ! $(echo $?) -eq 0 ]; then
 	printc "  Installing nvim dependencis\n" "i"
 	sudo apt install ${NVIM_COMPILE_DEPS[@]} -y
 	printc "  Install nvim\n" "i"
-	git clone https://github.com/neovim/neovim "$USER_HOME/Downloads/neovim"
-	cd "$USER_HOME/Downloads/neovim" && git checkout "$NVIM_VERSION" && make CMAKE_BUILD_TYPE=Release && sudo make install
-	rm -rf "$USER_HOME/Downloads/neovim"
+	git clone https://github.com/neovim/neovim "$USER_HOME/neovim"
+	cd "$USER_HOME/neovim" && git checkout "$NVIM_VERSION" && make CMAKE_BUILD_TYPE=Release && sudo make install
+	rm -rf "$USER_HOME/neovim"
 else
 	printc "  neovim is installed. \n" "i"
 fi
@@ -83,14 +80,16 @@ if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	cd "$USER_HOME/dotfiles" && ./install.sh --nvim --tmux --vim && rm -rf "$USER_HOME/dotfiles"
 fi
 
-printc "Installing fzf ...\n" "i"
-FZF_FILE="fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
-printc "  Downloading ...\n" "i"
-cd "$USER_HOME" && wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/$FZF_FILE"
-printc "  Installing ...\n" "i"
-sudo tar xf "$USER_HOME/$FZF_FILE" -C "/usr/bin/"
-rm -rf "$USER_HOME/$FZF_FILE"
-printc "Done\n" "s"
+if ! command -v fzf; then
+	printc "Installing fzf ...\n" "i"
+	FZF_FILE="fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
+	printc "  Downloading ...\n" "i"
+	cd "$USER_HOME" && wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/$FZF_FILE"
+	printc "  Installing ...\n" "i"
+	sudo tar xf "$USER_HOME/$FZF_FILE" -C "/usr/bin/"
+	rm -rf "$USER_HOME/$FZF_FILE"
+	printc "Done\n" "s"
+fi
 
 printc "Creating some alias ...\n" "i"
 if ! command -v so; then
