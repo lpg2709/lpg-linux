@@ -79,9 +79,8 @@ fi
 
 if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	printc "Install configurations for nvim and tmux\n" "s"
-	git clone https://gitlab.com/lpg2709/dotfiles.git "./dotfiles"
-	cd dotfiles && ./install.sh --nvim --tmux --vim
-	rm -rf "./dotfiles"
+	git clone https://gitlab.com/lpg2709/dotfiles.git
+	cd ./dotfiles && ./install.sh --nvim --tmux --vim && rm -rf "./dotfiles"
 fi
 
 printc "Installing fzf ...\n" "i"
