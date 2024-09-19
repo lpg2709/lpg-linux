@@ -79,15 +79,16 @@ fi
 
 if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	printc "Install configurations for nvim and tmux\n" "s"
-	git clone https://gitlab.com/lpg2709/dotfiles.git "/tmp/dotfiles"
-	/tmp/dotfiles/install.sh --nvim --tmux --vim
-	rm -rf "/tmp/dotfiles"
+	git clone https://gitlab.com/lpg2709/dotfiles.git "./dotfiles"
+	cd dotfiles && ./install.sh --nvim --tmux --vim
+	rm -rf "./dotfiles"
 fi
 
 printc "Installing fzf\n" "s"
-
-cd /tmp && wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
-sudo tar xf "/tmp/fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz" -C "/opt/fzf-${FZF_VERSION}-linux_${FZF_ARCH}"
+FZF_FILE="fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
+wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/$FZF_FILE"
+sudo tar xf "$FZF_FILE" -C "/usr/bin/"
+rm -rf "$FZF_FILE"
 
 printc "Creating some alias ...\n" "s"
 if ! command -v so; then
@@ -107,7 +108,6 @@ if ! command -v cls; then
 fi
 
 echo -e 'if command -v fzf; then \n\teval "$(fzf --bash)" \nfi' >> $USER_HOME/.bashrc
-echo -e "PATH='/opt/fzf-${FZF_VERSION}-linux_${FZF_ARCH}'" >> $USER_HOME/.bashrc
 
 printc "Done\n" "s"
 
