@@ -79,17 +79,17 @@ fi
 
 if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	printc "Install configurations for nvim and tmux\n" "s"
-	git clone https://gitlab.com/lpg2709/dotfiles.git
-	cd ./dotfiles && ./install.sh --nvim --tmux --vim && rm -rf "./dotfiles"
+	git clone https://gitlab.com/lpg2709/dotfiles.git "$USER_HOME/dotfiles"
+	cd "$USER_HOME/dotfiles" && ./install.sh --nvim --tmux --vim && rm -rf "$USER_HOME/dotfiles"
 fi
 
 printc "Installing fzf ...\n" "i"
 FZF_FILE="fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
 printc "  Downloading ...\n" "i"
-wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/$FZF_FILE"
+cd "$USER_HOME" && wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/$FZF_FILE"
 printc "  Installing ...\n" "i"
-sudo tar xf "$FZF_FILE" -C "/usr/bin/"
-rm -rf "$FZF_FILE"
+sudo tar xf "$USER_HOME/$FZF_FILE" -C "/usr/bin/"
+rm -rf "$USER_HOME/$FZF_FILE"
 printc "Done\n" "s"
 
 printc "Creating some alias ...\n" "i"
