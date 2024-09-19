@@ -76,7 +76,7 @@ fi
 
 if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	printc "Install configurations for nvim and tmux\n" "s"
-	git clone https://gitlab.com/lpg2709/dotfiles.git "$USER_HOME/dotfiles"
+	git clone https://gitlab.com/lpg2709/dotfiles "$USER_HOME/dotfiles"
 	cd "$USER_HOME/dotfiles" && ./install.sh --nvim --tmux --vim && rm -rf "$USER_HOME/dotfiles"
 fi
 
