@@ -84,13 +84,16 @@ if [ ! -d "$USER_HOME/.config/nvim" ]; then
 	rm -rf "./dotfiles"
 fi
 
-printc "Installing fzf\n" "s"
+printc "Installing fzf ...\n" "i"
 FZF_FILE="fzf-${FZF_VERSION}-linux_${FZF_ARCH}.tar.gz"
+printc "  Downloading ...\n" "i"
 wget "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/$FZF_FILE"
+printc "  Installing ...\n" "i"
 sudo tar xf "$FZF_FILE" -C "/usr/bin/"
 rm -rf "$FZF_FILE"
+printc "Done\n" "s"
 
-printc "Creating some alias ...\n" "s"
+printc "Creating some alias ...\n" "i"
 if ! command -v so; then
 	echo "alias so='source ~/.bashrc'" >> $USER_HOME/.bashrc
 fi
