@@ -5,7 +5,7 @@ ST="st-0.8.4"
 PROJECT="lpg-linux"
 
 INIT_PACK=("git" "curl" "wget")
-DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip")
+DEPS_PACK=("vim" "make" "build-essential" "tmux" "net-tools" "python3" "htop" "jq" "cmake" "tcpdump" "python3-pip" "fzf")
 NVIM_COMPILE_DEPS=("ninja-build" "gettext" "libtool" "libtool-bin" "autoconf" "automake" "g++" "pkg-config" "unzip" "doxygen" "ripgrep")
 
 function printc(){
@@ -99,6 +99,9 @@ fi
 if ! command -v cls; then
 	echo "alias cls='clear'" >> $USER_HOME/.bashrc
 fi
+
+echo 'if command -v fzf; then eval "$(fzf --bash)" fi' >> $USER_HOME/.bashrc
+
 printc "Done\n" "s"
 
 printc "Cleaning files ...\n" "s"
